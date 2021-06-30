@@ -1,43 +1,68 @@
 public class Critter {
+    private String CritterName;
     private boolean isAlive;
     private int foodLevel;
     private int tiredness;
+    private int exerciseLevel;
 
-    public Critter() {
+    public Critter(String name) {
+        CritterName = name;
         isAlive = true;
+        isWin = false;
         foodLevel = 5;
         tiredness = 0;
+        exerciseLevel = 0;
     }
 
     public boolean isAlive() {
         return isAlive;
     }
 
+    public boolean isWin() {
+        return isWin;
+    }
+
     private void die() {
         isAlive = false;
     }
+
+    private void win() { isWin = true; }
     
     public void sleep() {
-        System.out.println("Critter sleeps.");
+        System.out.println(CritterName +" sleeps.");
         tiredness = 0;
         foodLevel -= 3;
         if (foodLevel <= 0) {
-            System.out.println("Critter starves to death.");
+            System.out.println(CritterName +" starves to death.");
             die();
         }
     }
 
     public void feed() {
-        if (isAlive) {
-            System.out.println("Critter eats.");
+        if (isAlive && ! isWin ) {
+            System.out.println(CritterName +" eats.");
             foodLevel++;
             tiredness++;
             if (foodLevel > 10) {
-                System.out.println("Critter over ate.");
+                System.out.println(CritterName +" over ate.");
                 die();
             }
             else if (tiredness > 5) {
-                System.out.println("Critter is sleepy from so much food.");
+                System.out.println(CritterName +" is sleepy from so much food.");
+                sleep();
+            }
+        }
+    }
+
+    public void exercise(){
+        if (isAlive && ! isWin ) {
+            System.out.println(CritterName + " exercises.");
+            exerciseLevel++;
+            tiredness++;
+            if (exerciseLevel >= 10) {
+                win();
+            } else if (tiredness > 5) {
+                System.out.println(CritterName + " is sleepy from so much exercise.");
                 sleep();
             }
         }
