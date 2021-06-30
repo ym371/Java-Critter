@@ -1,6 +1,6 @@
 public class Critter {
     private String CritterName;
-    private boolean isAlive;
+    private boolean isAlive, isWin;
     private int foodLevel;
     private int tiredness;
     private int exerciseLevel;

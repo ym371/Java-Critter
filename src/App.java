@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Critter bob = new Critter();
+        Critter bob = new Critter("Bob");
         Scanner scanner = new Scanner(System.in);
         while (bob.isAlive() && !bob.isWin()) {
             System.out.println("What would you like Critter to do?");
@@ -11,7 +11,7 @@ public class App {
                 bob.feed();
             } else if (lineRead.equalsIgnoreCase("sleep")) {
                 bob.sleep();
-            } else if (lineRead.equasIgnoreCase("exercise")){
+            } else if (lineRead.equalsIgnoreCase("exercise")){
                 bob.exercise();
             }
         }
