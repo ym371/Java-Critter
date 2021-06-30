@@ -27,9 +27,24 @@ public class Critter {
     }
 
     private void win() { isWin = true; }
-    
+
+    private void wait (int ms){
+        try{
+            Thread.sleep(ms);
+        }
+        catch( InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+    }
+
     public void sleep() {
         System.out.println(CritterName +" sleeps.");
+        for (int i=1; i<=5; i++) {
+            System.out.print("z");
+            wait(1000);
+        }
+        System.out.print("\n");
+        
         tiredness = 0;
         foodLevel -= 3;
         if (foodLevel <= 0) {
