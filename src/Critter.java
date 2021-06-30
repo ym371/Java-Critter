@@ -1,6 +1,6 @@
 public class Critter {
     private String CritterName;
-    private boolean isAlive, isWin;
+    private boolean isAlive, Wins;
     private int foodLevel;
     private int tiredness;
     private int exerciseLevel;
@@ -8,25 +8,35 @@ public class Critter {
     public Critter(String name) {
         CritterName = name;
         isAlive = true;
-        isWin = false;
+        Wins = false;
         foodLevel = 5;
         tiredness = 0;
         exerciseLevel = 0;
+    }
+
+    public void addFoodLevel(int addValue) {
+        this.foodLevel = foodLevel + addValue;
+    }
+    public void addTiredness(int addValue) {
+        this.tiredness = tiredness + addValue;
+    }
+    public void addExerciseLevel(int addValue) {
+        this.exerciseLevel = exerciseLevel + addValue;
     }
 
     public boolean isAlive() {
         return isAlive;
     }
 
-    public boolean isWin() {
-        return isWin;
+    public boolean Wins() {
+        return Wins;
     }
 
     private void die() {
         isAlive = false;
     }
 
-    private void win() { isWin = true; }
+    private void win() { Wins = true; }
 
     private void wait (int ms){
         try{
@@ -39,6 +49,7 @@ public class Critter {
 
     public void sleep() {
         System.out.println(CritterName +" sleeps.");
+        CritterSound();
         for (int i=1; i<=5; i++) {
             System.out.print("z");
             wait(1000);
@@ -53,11 +64,11 @@ public class Critter {
         }
     }
 
-    public void feed() {
-        if (isAlive && ! isWin ) {
+    public void feed(Food food) {
+        if (isAlive && !Wins) {
             System.out.println(CritterName +" eats.");
-            foodLevel++;
-            tiredness++;
+            CritterSound();
+            food.applyFood(this);
             if (foodLevel > 10) {
                 System.out.println(CritterName +" over ate.");
                 die();
@@ -70,8 +81,9 @@ public class Critter {
     }
 
     public void exercise(){
-        if (isAlive && ! isWin ) {
+        if (isAlive && !Wins) {
             System.out.println(CritterName + " exercises.");
+            CritterSound();
             exerciseLevel++;
             tiredness++;
             if (exerciseLevel >= 10) {
@@ -81,5 +93,9 @@ public class Critter {
                 sleep();
             }
         }
+    }
+
+    public void CritterSound() {
+        System.out.println(CritterName + " makes a sound.");
     }
 }
